@@ -3,5 +3,6 @@
  - ai-ml: AI-ML scripts and stuff
  - apl: APL programs
  - c: C programs
+ - nusmv: Programs for NuSMV model checker
  - others: Programs in other languages
 

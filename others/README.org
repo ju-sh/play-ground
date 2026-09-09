@@ -3,3 +3,5 @@
  - ada-hello.adb: Sample Ada program
  - alda-hello.alda: Making music with alda
  - hello.awk: Sample awk script
+ - hello.cbl: Sample cobol program
+ - hello.f: Sample Fortran program (F90?)
