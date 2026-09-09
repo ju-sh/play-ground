@@ -4,7 +4,7 @@ import cv2
 import mediapipe as mp
 import numpy as np
 
-MODEL_PATH = "/media/famubu/f9b396f5-5f46-465a-a1ee-5b008f58d5f9/data/Soft/ai-models/hand_landmarker.task"
+MODEL_PATH = "/path/to/hand_landmarker.task"
 
 @dataclass
 class Status:

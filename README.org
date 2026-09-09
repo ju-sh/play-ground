@@ -1,0 +1,7 @@
+#+TITLE: README
+
+ - ai-ml: AI-ML scripts and stuff
+ - apl: APL programs
+ - c: C programs
+ - others: Programs in other languages
+

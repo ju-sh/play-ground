@@ -1,0 +1,5 @@
+#+TITLE: AI-ML stuff
+
+ - airbrush: Paint with fingers using opencv
+ - mal-asr: Malayalam speech to text
+

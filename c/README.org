@@ -1,0 +1,9 @@
+#+TITLE: C programs
+
+ - identifier-with-dollar.c: gcc allows identifiers with dollar sign
+ - letter-pyramid.c: pyramid with letters using given letter as seed value
+ - matrix-ops.c: sum and product of two matrices
+ - matrix-row-col-sum.c: row and column sum of matrices
+ - palindrome.c: string palindrome checker
+ - str-ops.c: string operations with minimal use of built-in functions
+

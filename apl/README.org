@@ -5,5 +5,5 @@ Tried with gnu-apl.
 Haven't yet used dyalog.
 
  - hello.apl
- - hello-matrix.apl
- - trigonometry.apl
+ - hello-matrix.apl: matrix operations
+ - trigonometry.apl: trigonometric functions

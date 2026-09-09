@@ -1,0 +1,5 @@
+#+TITLE: Malayalam ASR
+
+Needs Python 3.10
+
+See: https://ju-sh.github.io/blog/asr-mal.html
