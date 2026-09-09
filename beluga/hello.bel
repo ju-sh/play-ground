@@ -1,0 +1,89 @@
+% http://complogic.cs.mcgill.ca/tutorial.pdf
+
+nat: type.
+zero: nat.
+succ: nat -> nat.
+
+% -*- mode: compilation; default-directory: "~/gits/Beluga/" -*-
+% Compilation started at Sat Apr  6 22:18:39
+%
+% beluga /path/to/hi.bel
+% ## Type Reconstruction begin: /path/to/hi.bel ##
+% ## Type Reconstruction done:  /path/to/hi.bel ##
+%
+% Compilation finished at Sat Apr  6 22:18:39
+
+yes_or_no: type.
+yes: yes_or_no.
+no: yes_or_no.
+
+rec andalso: [ |- yes_or_no ] -> [ |- yes_or_no ] -> [ |- yes_or_no ] =
+  fn x => fn y => case x of
+  | [ |- no ] => [ |- no ]
+  | [ |- yes ] => y
+  ; 
+
+  
+rec add: [ |- nat ] -> [ |- nat ] -> [ |- nat ] =
+  fun x => fn y => case x of
+  | [ |- zero ] => y
+  | [ |- succ N ] =>
+	let [ |- R ] = add [ |- N ] y in
+        [ |- succ R ]
+  ; 
+  
+% nat list
+list: type.
+nil: list.
+cons: nat -> list -> list.
+
+rec length: [ |- list ] -> [ |- nat ] =
+  fn l => case l of
+  | [ |- nil ] => [ |- zero ]
+  | [ |- cons N L ] =>
+	let [ |- R ] = length [ |- L ] in
+        [ |- succ R ]
+  ; 
+
+rec map: ([ |- nat ] -> [ |- nat ]) -> [ |- list ] -> [ |- list ] =
+  fn f => fn l => case l of
+  | [ |- nil ] => [ |- nil ]
+  | [ |- cons N L ] =>
+	let [ |- X ] = f [ |- N ] in
+	let [ |- R ] = map f [ |- L ] in
+        [ |- cons X R ]
+  ; 
+  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Moving on to dependent types.
+
+bool: type.
+false: bool.
+true: bool.
+
+% Boolean vectors. Indexed by length
+bvec: nat -> type.
+bnil: bvec zero.
+bcons: bool -> bvec N -> bvec (succ N).
+
+let bv1 = [ |- bcons true bnil ];
+let bv2 = [ |- bcons true (bcons false bnil) ];
+
+rec bvecmap: ([ |- bool ] -> [ |- bool ]) -> [ |- bvec N ] -> [ |- bvec N ] =
+  fn f => fn v => case v of
+  | [ |- bnil ] => [ |- bnil ]
+  | [ |- bcons B V ] =>
+	let [ |- X ] = f [ |- B ] in
+	let [ |- R ] = bvecmap f [ |- V ] in
+        [ |- bcons X R ]
+  ; 
+
+rec bhead: [ |- bvec (succ N) ] -> [ |- bool ] =
+  fun v => case v of
+  | [ |- bcons B _ ] => [ |- B ]
+  ;
+
+rec btail: [ |- bvec (succ N) ] -> [ |- bvec N ] =
+  fun v => case v of
+  | [ |- bcons _ V ] => [ |- V ]
+  ;

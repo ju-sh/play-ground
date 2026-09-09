@@ -1,0 +1,5 @@
+#+TITLE: Beluga
+
+ - hello.bel: Few bool, nat, list operations
+ - eval.bel: Evaluation of simple bool and Peano nat terms
+

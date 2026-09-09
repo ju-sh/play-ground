@@ -1,0 +1,40 @@
+% http://complogic.cs.mcgill.ca/tutorial.pdf
+
+ty: type.
+bool: ty.
+nat: ty.
+
+value: ty -> type.
+vzero: value nat.
+vsucc: value nat -> value nat.
+vtrue: value bool.
+vfalse: value bool.
+
+term: ty -> type.
+true: term bool.
+false: term bool.
+zero: term nat.
+succ: term nat -> term nat.
+pred: term nat -> term nat.
+% iszero: term nat -> term bool.
+
+switch: term bool -> term T -> term T -> term T.
+
+rec eval: [ |- term T ] -> [ |- value T ] =
+  fn tm => case tm of
+  | [ |- true ] => [ |- vtrue ]
+  | [ |- false ] => [ |- vfalse ]
+  | [ |- zero ] => [ |- vzero ]
+  | [ |- succ N ] =>
+      let [ |- R ] = eval [ |- N ] in
+      [ |- vsucc R ]
+  | [ |- pred N ] => 
+      let [ |- R ] = eval [ |- N ] in
+      (case [ |- R ] of 
+       | [ |- vzero ] => [ |- vzero ]
+       | [ |- vsucc M ] => [ |- M ])
+  | [ |- switch C Y N ] => 
+      (case eval [ |- C ] of
+       | [ |- vtrue ] => eval [ |- Y ]
+       | [ |- vfalse ] => eval [ |- N ])
+  ;
